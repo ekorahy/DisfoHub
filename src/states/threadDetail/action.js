@@ -1,4 +1,5 @@
 import api from "../../utils/api";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 const ActionType = {
   RECEIVE_THREAD_DETAIL: "RECEIVE_THREAD_DETAIL",
@@ -105,17 +106,20 @@ function toggleNeutralVoteCommentActionCreator({
 
 function asyncReceiveThreadDetail(threadId) {
   return async (dispatch) => {
+    dispatch(showLoading());
     try {
       const detailThread = await api.getThreadDetail(threadId);
       dispatch(receiveThreadDetailActionCreator(detailThread));
     } catch (error) {
       alert(error.message);
     }
+    dispatch(hideLoading());
   };
 }
 
 function asyncAddComment({ content }) {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
     const { threadDetail } = getState();
     try {
       const comment = await api.createComment({
@@ -126,6 +130,7 @@ function asyncAddComment({ content }) {
     } catch (error) {
       alert(error.message);
     }
+    dispatch(hideLoading());
   };
 }
 
@@ -281,5 +286,5 @@ export {
   asyncToggleNeutralVoteThreadDetail,
   asyncToggleUpVoteComment,
   asyncToggleDownVoteComment,
-  asyncToggleNeutralVoteComment
+  asyncToggleNeutralVoteComment,
 };

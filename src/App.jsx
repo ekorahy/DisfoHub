@@ -10,6 +10,7 @@ import { ThreadDetail } from "./pages/ThreadDetail";
 import { AddThread } from "./pages/AddThread";
 import { Navigation } from "./components/molekul/Navigation";
 import { Leaderboards } from "./pages/Leaderboards";
+import { Loading } from "./components/atom/Loading";
 
 export const App = () => {
   const { authUser = null, isPreload = false } = useSelector(
@@ -33,6 +34,7 @@ export const App = () => {
   if (authUser === null) {
     return (
       <>
+        <Loading />
         <main>
           <Routes>
             <Route path="/*" element={<Login />} />
@@ -45,6 +47,7 @@ export const App = () => {
 
   return (
     <>
+      <Loading />
       <header className="fixed z-10 w-full p-4">
         <Navigation user={authUser} logout={onLogOut} />
       </header>

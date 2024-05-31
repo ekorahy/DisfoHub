@@ -1,5 +1,6 @@
 import api from "../../utils/api";
 import { receiveUsersActionCreator } from "../users/action";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 const ActionType = {
   RECEIVE_THREADS: "RECEIVE_THREADS",
@@ -59,6 +60,7 @@ function toggleNeutralvoteThread({ threadId, userId }) {
 
 function asyncGetThreads() {
   return async (dispatch) => {
+    dispatch(showLoading());
     try {
       const threads = await api.getThreads();
       const users = await api.getUsers();
@@ -67,17 +69,20 @@ function asyncGetThreads() {
     } catch (error) {
       alert(error.message);
     }
+    dispatch(hideLoading());
   };
 }
 
 function asyncAddThread({ title, body, category }) {
   return async (dispatch) => {
+    dispatch(showLoading());
     try {
       const thread = await api.createThread({ title, category, body });
       dispatch(addThreadActionCreator(thread));
     } catch (error) {
       alert(error.message);
     }
+    dispatch(hideLoading());
   };
 }
 

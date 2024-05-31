@@ -51,7 +51,10 @@ export const Home = () => {
         authUser={authUser.id}
       />
       <div className="absolute right-16">
-        <Link to='/add' className="fixed bottom-6 rounded-full bg-slate-600 p-3 text-xl text-white">
+        <Link
+          to="/add"
+          className="fixed bottom-6 rounded-full bg-slate-600 p-3 text-xl text-white"
+        >
           <IoMdAdd />
         </Link>
       </div>

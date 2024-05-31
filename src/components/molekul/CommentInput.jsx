@@ -4,7 +4,7 @@ export const CommentInput = ({ comment }) => {
   const [content, onContentChange] = useInput("");
 
   const onThreadCommentHandler = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     comment(content);
   };
 
@@ -17,7 +17,10 @@ export const CommentInput = ({ comment }) => {
         onChange={onContentChange}
         required
       ></textarea>
-      <button type="submit" className="bg-slate-600 py-2 text-white hover:bg-slate-700">
+      <button
+        type="submit"
+        className="bg-slate-600 py-2 text-white hover:bg-slate-700"
+      >
         Add
       </button>
     </form>
