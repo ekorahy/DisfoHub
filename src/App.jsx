@@ -9,6 +9,7 @@ import { asyncPreloadProcess } from "./states/isPreload/action";
 import { ThreadDetail } from "./pages/ThreadDetail";
 import { AddThread } from "./pages/AddThread";
 import { Navigation } from "./components/molekul/Navigation";
+import { Leaderboards } from "./pages/Leaderboards";
 
 export const App = () => {
   const { authUser = null, isPreload = false } = useSelector(
@@ -52,6 +53,7 @@ export const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/:id" element={<ThreadDetail />} />
           <Route path="/add" element={<AddThread />} />
+          <Route path="/leaderboards" element={<Leaderboards />} />
         </Routes>
       </main>
     </>
