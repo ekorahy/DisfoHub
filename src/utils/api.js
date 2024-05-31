@@ -1,5 +1,5 @@
 const api = (() => {
-  const BASE_URL = 'https://forum-api.dicoding.dev/v1';
+  const BASE_URL = "https://forum-api.dicoding.dev/v1";
 
   async function _fetchWithAuth(url, options = {}) {
     return fetch(url, {
@@ -12,18 +12,18 @@ const api = (() => {
   }
 
   function putAccessToken(token) {
-    localStorage.setItem('accessToken', token);
+    localStorage.setItem("accessToken", token);
   }
 
   function getAccessToken() {
-    return localStorage.getItem('accessToken');
+    return localStorage.getItem("accessToken");
   }
 
   async function register({ name, email, password }) {
     const response = await fetch(`${BASE_URL}/register`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
@@ -35,7 +35,7 @@ const api = (() => {
     const responseJson = await response.json();
     const { status, message } = responseJson;
 
-    if (status !== 'success') {
+    if (status !== "success") {
       throw new Error(message);
     }
 
@@ -47,9 +47,9 @@ const api = (() => {
 
   async function login({ email, password }) {
     const response = await fetch(`${BASE_URL}/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
@@ -61,7 +61,7 @@ const api = (() => {
 
     const { status, message } = responseJson;
 
-    if (status !== 'success') {
+    if (status !== "success") {
       throw new Error(message);
     }
 
@@ -78,7 +78,7 @@ const api = (() => {
 
     const { status, message } = responseJson;
 
-    if (status !== 'success') {
+    if (status !== "success") {
       throw new Error(message);
     }
 
@@ -88,12 +88,281 @@ const api = (() => {
     return user;
   }
 
+  async function getThreads() {
+    const response = await fetch(`${BASE_URL}/threads`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+
+    const {
+      data: { threads },
+    } = responseJson;
+
+    return threads;
+  }
+
+  async function getUsers() {
+    const response = await fetch(`${BASE_URL}/users`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+
+    const {
+      data: { users },
+    } = responseJson;
+    return users;
+  }
+
+  async function getLeaderboards() {
+    const response = await fetch(`${BASE_URL}/leaderboards`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+
+    const {
+      data: { leaderboards },
+    } = responseJson;
+
+    return leaderboards;
+  }
+
+  async function getThreadDetail(id) {
+    const response = await fetch(`${BASE_URL}/threads/${id}`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+
+    const {
+      data: { detailThread },
+    } = responseJson;
+    return detailThread;
+  }
+
+  async function createComment({ content, commentTo }) {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${commentTo}/comments`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content,
+        }),
+      },
+    );
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+
+    const {
+      data: { comment },
+    } = responseJson;
+    return comment;
+  }
+
+  async function createThread({ title, category, body }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title,
+        category,
+        body,
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+
+    const {
+      data: { thread },
+    } = responseJson;
+    return thread;
+  }
+
+  async function toggleUpVoteThread(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        threadId: id,
+      }),
+    });
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+  }
+
+  async function toggleDownVoteThread(id) {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${id}/down-vote`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          threadId: id,
+        }),
+      },
+    );
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+  }
+
+  async function toggleNeutralVoteThread(id) {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${id}/neutral-vote`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          threadId: id,
+        }),
+      },
+    );
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== "success") {
+      throw new Error(message);
+    }
+  }
+
+  async function toggleUpVoteComment({ threadId, commentId }) {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          threadId,
+          commentId,
+        }),
+      },
+    );
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+    if (status !== "success") {
+      throw new Error(message);
+    }
+  }
+
+  async function toggleDownVoteComment({ threadId, commentId }) {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          threadId,
+          commentId,
+        }),
+      },
+    );
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+    if (status !== "success") {
+      throw new Error(message);
+    }
+  }
+
+  async function toggleNeutralVoteComment({ threadId, commentId }) {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          threadId,
+          commentId,
+        }),
+      },
+    );
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+    if (status !== "success") {
+      throw new Error(message);
+    }
+  }
+
   return {
     putAccessToken,
     getAccessToken,
     login,
     register,
     getOwnProfile,
+    getThreads,
+    getUsers,
+    getLeaderboards,
+    getThreadDetail,
+    createComment,
+    createThread,
+    toggleUpVoteThread,
+    toggleDownVoteThread,
+    toggleNeutralVoteThread,
+    toggleUpVoteComment,
+    toggleDownVoteComment,
+    toggleNeutralVoteComment,
   };
 })();
 

@@ -6,6 +6,7 @@ import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
 import { asyncPreloadProcess } from "./states/isPreload/action";
+import { ThreadDetail } from "./pages/ThreadDetail";
 
 export const App = () => {
   const { authUser = null, isPreload = false } = useSelector(
@@ -16,7 +17,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(asyncPreloadProcess());
-  });
+  }, []);
 
   const onSignOut = () => {
     dispatch(asyncUnsetAuthUser());
@@ -44,6 +45,7 @@ export const App = () => {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/:id" element={<ThreadDetail />} />
         </Routes>
       </main>
     </>

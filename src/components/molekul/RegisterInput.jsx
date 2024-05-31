@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import useInput from "../../custom_hooks/useInput";
 import PropTypes from "prop-types";
 
 export const RegisterInput = ({ register }) => {
+  const navigate = useNavigate();
   const [name, onNameChange] = useInput("");
   const [email, onEmailChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
@@ -13,6 +15,7 @@ export const RegisterInput = ({ register }) => {
       alert("Passwords are not the same.");
     } else {
       register({ name, email, password });
+      navigate("/");
     }
   };
 
