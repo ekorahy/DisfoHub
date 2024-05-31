@@ -7,6 +7,8 @@ import {
   asyncToggleUpvoteThread,
 } from "../states/threads/action";
 import { ThreadList } from "../components/molekul/ThreadList";
+import { IoMdAdd } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   const {
@@ -40,7 +42,7 @@ export const Home = () => {
   }));
 
   return (
-    <div>
+    <div className="relative">
       <ThreadList
         threads={threadsList}
         onUpVote={onUpVote}
@@ -48,6 +50,11 @@ export const Home = () => {
         onNeutralVote={onNeutralVote}
         authUser={authUser.id}
       />
+      <div className="absolute right-16">
+        <Link to='/add' className="fixed bottom-6 rounded-full bg-slate-600 p-3 text-xl text-white">
+          <IoMdAdd />
+        </Link>
+      </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
 import { asyncPreloadProcess } from "./states/isPreload/action";
 import { ThreadDetail } from "./pages/ThreadDetail";
+import { AddThread } from "./pages/AddThread";
 
 export const App = () => {
   const { authUser = null, isPreload = false } = useSelector(
@@ -42,10 +43,11 @@ export const App = () => {
 
   return (
     <>
-      <main>
+      <main className="mx-auto max-w-3xl">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:id" element={<ThreadDetail />} />
+          <Route path="/add" element={<AddThread />} />
         </Routes>
       </main>
     </>
