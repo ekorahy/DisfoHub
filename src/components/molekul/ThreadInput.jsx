@@ -1,16 +1,25 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../custom_hooks/useInput";
 import PropTypes from "prop-types";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
 
 export const ThreadInput = ({ addThread }) => {
   const [title, onTitleChange] = useInput("");
   const [category, onCategoryChange] = useInput("");
-  const [body, onBodyChange] = useInput("");
+  const [body, setBody] = useState(() => EditorState.createEmpty());
   const navigate = useNavigate();
 
   const addThreadHandler = (event) => {
     event.preventDefault();
-    addThread({ title, category, body });
+
+    const contentState = body.getCurrentContent();
+    const rawContentState = convertToRaw(contentState);
+    const htmlContent = draftToHtml(rawContentState);
+
+    addThread({ title, category, body: htmlContent });
     navigate("/");
   };
 
@@ -46,14 +55,15 @@ export const ThreadInput = ({ addThread }) => {
         <label className="block" htmlFor="body">
           Body
         </label>
-        <textarea
-          className="min-h-36 w-full border"
-          type="text"
-          id="body"
-          value={body}
-          onChange={onBodyChange}
-          required
-        ></textarea>
+        <div className="border p-2" id="body">
+          <Editor
+            editorState={body}
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
+            onEditorStateChange={setBody}
+          />
+        </div>
       </div>
       <button
         className="bg-slate-600 py-2 text-white hover:bg-slate-700"

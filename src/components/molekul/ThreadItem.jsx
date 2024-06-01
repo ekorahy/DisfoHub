@@ -66,7 +66,7 @@ export const ThreadItem = ({
         <Link to={`/${id}`} className="font-bold">
           {title}
         </Link>
-        <div>{parse(`${body}`)}</div>
+        <div className="max-w-4xl">{parse(`${body}`)}</div>
       </div>
       <div className="flex gap-4 text-lg">
         <button
