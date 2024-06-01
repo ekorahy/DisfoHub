@@ -1,7 +1,8 @@
 import { CiSearch } from "react-icons/ci";
+import { MdClear } from "react-icons/md";
 import PropTypes from "prop-types";
 
-export const SearchBar = ({ keyword, keywordChange }) => {
+export const SearchBar = ({ keyword, keywordChange, removeSearchBar }) => {
   return (
     <label
       htmlFor="email"
@@ -9,11 +10,17 @@ export const SearchBar = ({ keyword, keywordChange }) => {
     >
       <CiSearch className="pointer-events-none absolute left-3 top-1/2 h-6 w-6 -translate-y-1/2 transform" />
       <input
-        className="form-input h-10 w-full rounded-md border-2 p-2 pl-12"
+        className="form-input h-10 w-full rounded-md border-2 p-2 px-12"
         type="text"
         value={keyword}
         onChange={(event) => keywordChange(event.target.value)}
       />
+      <button
+        className={`${keyword === "" ? "hidden" : "absolute"} right-3 top-1/2 h-6 w-6 -translate-y-1/2 transform text-rose-600 hover:text-rose-700`}
+        onClick={() => removeSearchBar()}
+      >
+        <MdClear />
+      </button>
     </label>
   );
 };
@@ -21,4 +28,5 @@ export const SearchBar = ({ keyword, keywordChange }) => {
 SearchBar.propTypes = {
   keyword: PropTypes.string.isRequired,
   keywordChange: PropTypes.func.isRequired,
+  removeSearchBar: PropTypes.func.isRequired,
 };

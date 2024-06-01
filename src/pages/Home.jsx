@@ -46,6 +46,11 @@ export const Home = () => {
     setSearchParams({ keyword });
   };
 
+  const onRemoveSearchBarHandler = () => {
+    setKeyword("");
+    setSearchParams("");
+  };
+
   const filteredThreads = threads.filter((thread) => {
     const keywordLower = keyword.toLowerCase();
     const matchesTitle = thread.title.toLowerCase().includes(keywordLower);
@@ -71,7 +76,11 @@ export const Home = () => {
   return (
     <div className="relative">
       <div className="my-20 p-4">
-        <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+        <SearchBar
+          keyword={keyword}
+          keywordChange={onKeywordChangeHandler}
+          removeSearchBar={onRemoveSearchBarHandler}
+        />
         <div className="mt-4 flex items-center">
           <p>Popular category :</p>
           <CategoryList
