@@ -10,6 +10,7 @@ import { ThreadList } from "../components/molekul/ThreadList";
 import { IoMdAdd } from "react-icons/io";
 import { Link, useSearchParams } from "react-router-dom";
 import { SearchBar } from "../components/atom/SearchBar";
+import { CategoryList } from "../components/molekul/CategoryList";
 
 export const Home = () => {
   const {
@@ -62,10 +63,22 @@ export const Home = () => {
     authUser: authUser.id,
   }));
 
+  const threadCategoryList = threads.filter(
+    (thread, index) =>
+      threads.findIndex((obj) => obj.category === thread.category) === index,
+  );
+
   return (
     <div className="relative">
       <div className="my-20 p-4">
         <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+        <div className="mt-4 flex items-center">
+          <p>Popular category :</p>
+          <CategoryList
+            threads={threadCategoryList}
+            categoryClickHandler={onKeywordChangeHandler}
+          />
+        </div>
       </div>
       {threadsList.length === 0 ? (
         <p className="text-center text-rose-600">Empty data</p>
