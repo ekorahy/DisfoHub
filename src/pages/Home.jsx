@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   asyncGetThreads,
@@ -8,7 +8,8 @@ import {
 } from "../states/threads/action";
 import { ThreadList } from "../components/molekul/ThreadList";
 import { IoMdAdd } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { SearchBar } from "../components/atom/SearchBar";
 
 export const Home = () => {
   const {
@@ -18,6 +19,10 @@ export const Home = () => {
   } = useSelector((states) => states);
 
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyword, setKeyword] = useState(() => {
+    return searchParams.get("keyword") || "";
+  });
 
   useEffect(() => {
     dispatch(asyncGetThreads());
@@ -35,7 +40,23 @@ export const Home = () => {
     dispatch(asyncToggleNeutralvoteThread(threadId));
   };
 
-  const threadsList = threads.map((thread) => ({
+  const onKeywordChangeHandler = (keyword) => {
+    setKeyword(keyword);
+    setSearchParams({ keyword });
+  };
+
+  const filteredThreads = threads.filter((thread) => {
+    const keywordLower = keyword.toLowerCase();
+    const matchesTitle = thread.title.toLowerCase().includes(keywordLower);
+    const matchesBody = thread.body.toLowerCase().includes(keywordLower);
+    const matchesCategory = thread.category
+      .toLowerCase()
+      .includes(keywordLower);
+
+    return matchesTitle || matchesBody || matchesCategory;
+  });
+
+  const threadsList = filteredThreads.map((thread) => ({
     ...thread,
     user: users.find((user) => user.id === thread.ownerId),
     authUser: authUser.id,
@@ -43,13 +64,20 @@ export const Home = () => {
 
   return (
     <div className="relative">
-      <ThreadList
-        threads={threadsList}
-        onUpVote={onUpVote}
-        onDownVote={onDownVote}
-        onNeutralVote={onNeutralVote}
-        authUser={authUser.id}
-      />
+      <div className="my-20 p-4">
+        <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+      </div>
+      {threadsList.length === 0 ? (
+        <p className="text-center text-rose-600">Empty data</p>
+      ) : (
+        <ThreadList
+          threads={threadsList}
+          onUpVote={onUpVote}
+          onDownVote={onDownVote}
+          onNeutralVote={onNeutralVote}
+          authUser={authUser.id}
+        />
+      )}
       <div className="absolute right-16">
         <Link
           to="/add"
