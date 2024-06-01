@@ -1,5 +1,6 @@
 import api from "../../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
+import Swal from "sweetalert2";
 
 const ActionType = {
   SET_AUTH_USER: "SET_AUTH_USER",
@@ -32,8 +33,18 @@ function asyncSetAuthUser({ email, password }) {
       api.putAccessToken(token);
       const authUser = await api.getOwnProfile();
       dispatch(setAuthUserActionCreator(authUser));
+      Swal.fire({
+        icon: "success",
+        title: "Successfully login",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
     dispatch(hideLoading());
   };

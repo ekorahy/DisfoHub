@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import useInput from "../../custom_hooks/useInput";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 
 export const RegisterInput = ({ register }) => {
-  const navigate = useNavigate();
   const [name, onNameChange] = useInput("");
   const [email, onEmailChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
@@ -12,10 +11,13 @@ export const RegisterInput = ({ register }) => {
   const onRegisterHandler = (event) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords are not the same.");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Passwords are not the same.",
+      });
     } else {
       register({ name, email, password });
-      navigate("/");
     }
   };
 

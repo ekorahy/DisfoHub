@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncUnsetAuthUser } from "./states/authUser/action";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
@@ -11,12 +11,14 @@ import { AddThread } from "./pages/AddThread";
 import { Navigation } from "./components/molekul/Navigation";
 import { Leaderboards } from "./pages/Leaderboards";
 import { Loading } from "./components/atom/Loading";
+import Swal from "sweetalert2";
 
 export const App = () => {
   const { authUser = null, isPreload = false } = useSelector(
     (states) => states,
   );
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +26,25 @@ export const App = () => {
   }, [dispatch]);
 
   const onLogOut = () => {
-    dispatch(asyncUnsetAuthUser());
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yeah, sure.",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(asyncUnsetAuthUser());
+        Swal.fire({
+          title: "Log out!",
+          text: "You're successfully logged out",
+          icon: "success",
+        });
+        navigate("/");
+      }
+    });
   };
 
   if (isPreload) {
@@ -37,7 +57,7 @@ export const App = () => {
         <Loading />
         <main>
           <Routes>
-            <Route path="/*" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
         </main>

@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import { asyncRegisterUser } from "../states/users/action";
 import { RegisterInput } from "../components/molekul/RegisterInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Register = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const onRegister = ({ name, email, password }) => {
-    dispatch(asyncRegisterUser({ name, email, password }));
+    dispatch(asyncRegisterUser({ name, email, password }, navigate));
   };
 
   return (

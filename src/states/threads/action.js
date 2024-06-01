@@ -1,6 +1,7 @@
 import api from "../../utils/api";
 import { receiveUsersActionCreator } from "../users/action";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
+import Swal from "sweetalert2";
 
 const ActionType = {
   RECEIVE_THREADS: "RECEIVE_THREADS",
@@ -67,7 +68,16 @@ function asyncGetThreads() {
       dispatch(receiveThreadsActionCreator(threads));
       dispatch(receiveUsersActionCreator(users));
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
     dispatch(hideLoading());
   };
@@ -79,8 +89,18 @@ function asyncAddThread({ title, body, category }) {
     try {
       const thread = await api.createThread({ title, category, body });
       dispatch(addThreadActionCreator(thread));
+      Swal.fire({
+        icon: "success",
+        title: "Successfully added a new thread",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
     dispatch(hideLoading());
   };
@@ -94,7 +114,11 @@ function asyncToggleUpvoteThread(threadId) {
     try {
       await api.toggleUpVoteThread(threadId);
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       dispatch(toggleUpvoteThread({ threadId, userId: authUser.id }));
     }
   };
@@ -108,7 +132,11 @@ function asyncToggleDownvoteThread(threadId) {
     try {
       await api.toggleDownVoteThread(threadId);
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       dispatch(toggleDownvoteThread({ threadId, userId: authUser.id }));
     }
   };
@@ -122,7 +150,11 @@ function asyncToggleNeutralvoteThread(threadId) {
     try {
       await api.toggleNeutralVoteThread(threadId);
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       dispatch(toggleNeutralvoteThread({ threadId, userId: authUser.id }));
     }
   };

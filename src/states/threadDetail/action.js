@@ -1,5 +1,6 @@
 import api from "../../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
+import Swal from "sweetalert2";
 
 const ActionType = {
   RECEIVE_THREAD_DETAIL: "RECEIVE_THREAD_DETAIL",
@@ -111,7 +112,11 @@ function asyncReceiveThreadDetail(threadId) {
       const detailThread = await api.getThreadDetail(threadId);
       dispatch(receiveThreadDetailActionCreator(detailThread));
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
     dispatch(hideLoading());
   };
@@ -128,7 +133,11 @@ function asyncAddComment({ content }) {
       });
       dispatch(addCommentActionCreator(comment));
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
     }
     dispatch(hideLoading());
   };
@@ -144,7 +153,11 @@ function asyncToggleUpVoteThreadDetail(threadId) {
     try {
       await api.toggleUpVoteThread(threadId);
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       dispatch(
         toggleUpVoteThreadDetailActionCreator({
           threadId,
@@ -168,7 +181,11 @@ function asyncToggleDownVoteThreadDetail(threadId) {
     try {
       await api.toggleDownVoteThread(threadId);
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       dispatch(
         toggleDownVoteThreadDetailActionCreator({
           threadId,
@@ -192,7 +209,11 @@ function asyncToggleNeutralVoteThreadDetail(threadId) {
     try {
       await api.toggleNeutralVoteThread(threadId);
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       dispatch(
         toggleNeutralVoteThreadDetailActionCreator({
           threadId,
@@ -217,7 +238,11 @@ function asyncToggleUpVoteComment({ threadId, commentId }) {
     try {
       await api.toggleUpVoteComment({ threadId, commentId });
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       toggleUpVoteCommentActionCreator({
         threadId,
         commentId,
@@ -241,7 +266,11 @@ function asyncToggleDownVoteComment({ threadId, commentId }) {
     try {
       await api.toggleDownVoteComment({ threadId, commentId });
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       toggleDownVoteCommentActionCreator({
         threadId,
         commentId,
@@ -265,7 +294,11 @@ function asyncToggleNeutralVoteComment({ threadId, commentId }) {
     try {
       await api.toggleNeutralVoteComment({ threadId, commentId });
     } catch (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
       toggleNeutralVoteCommentActionCreator({
         threadId,
         commentId,
