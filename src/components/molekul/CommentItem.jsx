@@ -46,25 +46,25 @@ export const CommentItem = ({
   };
 
   return (
-    <div className="mb-4">
+    <div className="mb-6">
       <div className="flex items-center gap-2">
         <img className="rounded-full" src={owner.avatar} width={40} alt="" />
         <div className="text-sm">
-          <p>{owner.name}</p>
-          <p>{postedAt(createdAt)}</p>
+          <p className="font-semibold">{owner.name}</p>
+          <p className="text-sm">{postedAt(createdAt)}</p>
         </div>
       </div>
-      <div className="ml-12 mt-2 bg-slate-100 p-2">{parse(`${content}`)}</div>
+      <div className="ml-12 mt-2 bg-slate-50 p-2">{parse(`${content}`)}</div>
       <div className="ml-12 mt-2 flex gap-2">
         <button
-          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1"
+          className="flex items-center gap-2 rounded bg-slate-50 px-3 py-1 hover:bg-slate-100"
           onClick={() => upVoteCommentHandler()}
         >
           {isCommentUpVoted ? <BiSolidUpvote /> : <BiUpvote />}{" "}
           {upVotesBy.length}
         </button>
         <button
-          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1"
+          className="flex items-center gap-2 rounded bg-slate-50 px-3 py-1 hover:bg-slate-100"
           onClick={() => downVoteCommentHandler()}
         >
           {isCommentDownVoted ? <BiSolidDownvote /> : <BiDownvote />}{" "}

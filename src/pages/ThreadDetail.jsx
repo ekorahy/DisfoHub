@@ -57,7 +57,7 @@ export const ThreadDetail = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="mt-20 p-4">
       <ThreadDetailContent
         {...threadDetail}
         authUser={authUser.id}
@@ -66,19 +66,25 @@ export const ThreadDetail = () => {
         onNeutralVote={onNeutralVote}
       />
       <div className="mb-4">
-        <p>Leave a comment</p>
+        <p className="mb-2">Leave a comment</p>
         <CommentInput comment={onCommentThread} />
       </div>
       <div>
-        <p className="mb-4">Comments ({threadDetail.comments.length})</p>
+        <p className="mb-4 font-bold">
+          Comments ({threadDetail.comments.length})
+        </p>
         <div>
-          <CommentList
-            userId={authUser.id}
-            comments={threadDetail.comments}
-            upVoteComment={onUpVoteComment}
-            downVoteComment={onDownVoteComment}
-            neutralVoteComment={onNeutralVoteComment}
-          />
+          {threadDetail.comments.length === 0 ? (
+            <p className="text-center text-rose-600">No Comments</p>
+          ) : (
+            <CommentList
+              userId={authUser.id}
+              comments={threadDetail.comments}
+              upVoteComment={onUpVoteComment}
+              downVoteComment={onDownVoteComment}
+              neutralVoteComment={onNeutralVoteComment}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import {
   BiSolidUpvote,
   BiUpvote,
 } from "react-icons/bi";
+import PropTypes from "prop-types";
 
 export const ThreadDetailContent = ({
   id,
@@ -16,7 +17,6 @@ export const ThreadDetailContent = ({
   owner,
   upVotesBy,
   downVotesBy,
-  comments,
   authUser,
   onUpVote,
   onDownVote,
@@ -48,12 +48,12 @@ export const ThreadDetailContent = ({
   };
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 border-b pb-6">
       <div className="mb-4 flex items-center gap-4">
         <img className="rounded-full" src={owner.avatar} width={50} alt="" />
         <div>
           <p className="font-bold">{owner.name}</p>
-          <p>{postedAt(createdAt)}</p>
+          <p className="text-sm">{postedAt(createdAt)}</p>
         </div>
       </div>
       <div className="mb-4">
@@ -65,14 +65,14 @@ export const ThreadDetailContent = ({
       </div>
       <div className="flex gap-4 text-lg">
         <button
-          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1"
+          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1 hover:bg-slate-200"
           onClick={() => onUpVoteClick()}
         >
           {isThreadUpVoted ? <BiSolidUpvote /> : <BiUpvote />}{" "}
           {upVotesBy.length}
         </button>
         <button
-          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1"
+          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1 hover:bg-slate-200"
           onClick={() => onDownVoteClick()}
         >
           {isThreadDownVoted ? <BiSolidDownvote /> : <BiDownvote />}{" "}
@@ -81,4 +81,19 @@ export const ThreadDetailContent = ({
       </div>
     </div>
   );
+};
+
+ThreadDetailContent.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  owner: PropTypes.objectOf(PropTypes.string).isRequired,
+  upVotesBy: PropTypes.array.isRequired,
+  downVotesBy: PropTypes.array.isRequired,
+  authUser: PropTypes.string.isRequired,
+  onUpVote: PropTypes.func.isRequired,
+  onDownVote: PropTypes.func.isRequired,
+  onNeutralVote: PropTypes.func.isRequired,
 };
