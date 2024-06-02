@@ -42,13 +42,17 @@ export const Navigation = ({ user, logout }) => {
           <img src="/logo.png" alt="" width={30} />
           <div className="hidden gap-2 lg:flex">
             <NavLink
-              className="flex items-center gap-1 p-2 hover:text-purple-700"
+              className={({ isActive }) =>
+                `flex items-center gap-1 p-2 hover:text-purple-700 ${isActive ? "text-purple-600" : ""}`
+              }
               to="/"
             >
               <RiChatThreadLine /> Threads
             </NavLink>
             <NavLink
-              className="flex items-center gap-1 p-2 hover:text-purple-700"
+              className={({ isActive }) =>
+                `flex items-center gap-1 p-2 hover:text-purple-700 ${isActive ? "text-purple-600" : ""}`
+              }
               to="/leaderboards"
             >
               <MdOutlineLeaderboard /> Leaderboards
@@ -84,13 +88,17 @@ export const Navigation = ({ user, logout }) => {
         </div>
         <div className="mt-2 border-b pb-2">
           <NavLink
-            className="flex items-center gap-1 p-2 hover:text-purple-700"
+            className={({ isActive }) =>
+              `flex items-center gap-1 p-2 hover:text-purple-700 ${isActive ? "text-purple-600" : ""}`
+            }
             to="/"
           >
             <RiChatThreadLine /> Threads
           </NavLink>
           <NavLink
-            className="flex items-center gap-1 p-2 hover:text-purple-700"
+            className={({ isActive }) =>
+              `flex items-center gap-1 p-2 hover:text-purple-700 ${isActive ? "text-purple-600" : ""}`
+            }
             to="/leaderboards"
           >
             <MdOutlineLeaderboard /> Leaderboards
