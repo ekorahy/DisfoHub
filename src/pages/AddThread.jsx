@@ -10,8 +10,18 @@ export const AddThread = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
-      <ThreadInput addThread={onAddThread} />
+    <div className="mt-20 flex items-center justify-center p-4">
+      <div>
+        <div className="border-b border-dashed py-4">
+          <h2 className="text-lg font-bold">Add New Thread Form</h2>
+          <p className="text-sm">
+            Please fill in the details below to create a new thread. Be sure to
+            provide a descriptive title, category and content to engage other
+            users.
+          </p>
+        </div>
+        <ThreadInput addThread={onAddThread} />
+      </div>
     </div>
   );
 };

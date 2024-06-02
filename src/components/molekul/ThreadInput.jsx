@@ -24,13 +24,13 @@ export const ThreadInput = ({ addThread }) => {
   };
 
   return (
-    <form className="grid w-full md:w-4/5" onSubmit={addThreadHandler}>
+    <form className="grid w-full pt-4" onSubmit={addThreadHandler}>
       <div className="mb-4">
-        <label className="block" htmlFor="title">
+        <label className="mb-1 block" htmlFor="title">
           Title
         </label>
         <input
-          className="w-full border"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           type="text"
           id="title"
           value={title}
@@ -39,11 +39,11 @@ export const ThreadInput = ({ addThread }) => {
         />
       </div>
       <div className="mb-4">
-        <label className="block" htmlFor="category">
+        <label className="mb-1 block" htmlFor="category">
           Category
         </label>
         <input
-          className="w-full border"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           type="text"
           id="category"
           value={category}
@@ -52,10 +52,10 @@ export const ThreadInput = ({ addThread }) => {
         />
       </div>
       <div className="mb-4">
-        <label className="block" htmlFor="body">
+        <label className="mb-1 block" htmlFor="body">
           Body
         </label>
-        <div className="border p-2" id="body">
+        <div className="border border-slate-300 p-2" id="body">
           <Editor
             editorState={body}
             toolbarClassName="toolbarClassName"
