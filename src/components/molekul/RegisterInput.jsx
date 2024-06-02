@@ -1,12 +1,25 @@
+import { useState } from "react";
 import useInput from "../../custom_hooks/useInput";
 import PropTypes from "prop-types";
 import Swal from "sweetalert2";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 export const RegisterInput = ({ register }) => {
   const [name, onNameChange] = useInput("");
   const [email, onEmailChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
-  const [confirmPassword, onConfirmPasswordChanage] = useInput("");
+  const [confirmPassword, onConfirmPasswordChange] = useInput("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
+  };
 
   const onRegisterHandler = (event) => {
     event.preventDefault();
@@ -53,27 +66,49 @@ export const RegisterInput = ({ register }) => {
         <label className="mb-1 block font-semibold" htmlFor="password">
           Password
         </label>
-        <input
-          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
-          id="password"
-          type="password"
-          value={password}
-          onChange={onPasswordChange}
-          required
-        />
+        <div className="relative">
+          <input
+            className="w-full border border-slate-300 p-2 focus:outline-slate-400"
+            id="password"
+            type={isPasswordVisible ? "text" : "password"}
+            value={password}
+            onChange={onPasswordChange}
+            required
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 h-6 w-6 -translate-y-1/2 transform text-xl text-slate-600 hover:text-slate-700"
+            onClick={togglePasswordVisibility}
+          >
+            {isPasswordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+          </button>
+        </div>
       </div>
       <div className="mb-6">
-        <label className="mb-1 block font-semibold" htmlFor="password">
+        <label className="mb-1 block font-semibold" htmlFor="confirm-password">
           Confirm Password
         </label>
-        <input
-          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
-          id="password"
-          type="password"
-          value={confirmPassword}
-          onChange={onConfirmPasswordChanage}
-          required
-        />
+        <div className="relative">
+          <input
+            className="w-full border border-slate-300 p-2 focus:outline-slate-400"
+            id="confirm-password"
+            type={isConfirmPasswordVisible ? "text" : "password"}
+            value={confirmPassword}
+            onChange={onConfirmPasswordChange}
+            required
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 h-6 w-6 -translate-y-1/2 transform text-xl text-slate-600 hover:text-slate-700"
+            onClick={toggleConfirmPasswordVisibility}
+          >
+            {isConfirmPasswordVisible ? (
+              <AiOutlineEyeInvisible />
+            ) : (
+              <AiOutlineEye />
+            )}
+          </button>
+        </div>
       </div>
       <button
         className="bg-slate-600 py-2 text-white hover:bg-slate-700"
