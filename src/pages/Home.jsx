@@ -75,13 +75,16 @@ export const Home = () => {
 
   return (
     <div className="relative">
-      <div className="my-20 p-4">
+      <div className="absolute right-20 top-0 h-48 w-48 animate-blob rounded-full bg-purple-300 opacity-70 mix-blend-multiply blur-xl filter sm:h-72 sm:w-72"></div>
+      <div className="animation-delay-2000 absolute right-40 top-0 h-48 w-48 animate-blob rounded-full bg-yellow-300 opacity-70 mix-blend-multiply blur-xl filter sm:h-72 sm:w-72"></div>
+      <div className="animation-delay-4000 absolute right-60 top-0 h-48 w-48 animate-blob rounded-full bg-pink-300 opacity-70 mix-blend-multiply blur-xl filter sm:h-72 sm:w-72"></div>
+      <div className="mt-20 p-4">
         <SearchBar
           keyword={keyword}
           keywordChange={onKeywordChangeHandler}
           removeSearchBar={onRemoveSearchBarHandler}
         />
-        <div className="mt-4 flex items-center">
+        <div className="mt-4 flex flex-wrap items-center gap-2">
           <p>Popular category :</p>
           <CategoryList
             threads={threadCategoryList}
@@ -89,21 +92,23 @@ export const Home = () => {
           />
         </div>
       </div>
-      {threadsList.length === 0 ? (
-        <p className="text-center text-rose-600">Empty data</p>
-      ) : (
-        <ThreadList
-          threads={threadsList}
-          onUpVote={onUpVote}
-          onDownVote={onDownVote}
-          onNeutralVote={onNeutralVote}
-          authUser={authUser.id}
-        />
-      )}
+      <div className="bg-white/30 backdrop-blur-sm">
+        {threadsList.length === 0 ? (
+          <p className="text-center text-rose-600">Empty data</p>
+        ) : (
+          <ThreadList
+            threads={threadsList}
+            onUpVote={onUpVote}
+            onDownVote={onDownVote}
+            onNeutralVote={onNeutralVote}
+            authUser={authUser.id}
+          />
+        )}
+      </div>
       <div className="absolute right-16">
         <Link
           to="/add"
-          className="fixed bottom-6 rounded-full bg-slate-600 p-3 text-xl text-white"
+          className="fixed bottom-6 rounded-full bg-slate-600 p-3 text-xl text-white hover:bg-slate-700"
         >
           <IoMdAdd />
         </Link>

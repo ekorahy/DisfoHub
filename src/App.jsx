@@ -68,10 +68,10 @@ export const App = () => {
   return (
     <>
       <Loading />
-      <header className="fixed z-10 w-full p-4">
+      <header className="fixed top-0 z-10 w-full p-4">
         <Navigation user={authUser} logout={onLogOut} />
       </header>
-      <main className="mx-auto max-w-3xl pt-20">
+      <main className="mx-auto max-w-3xl">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:id" element={<ThreadDetail />} />

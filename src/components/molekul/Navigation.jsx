@@ -3,12 +3,13 @@ import { NavLink } from "react-router-dom";
 import { RiChatThreadLine } from "react-icons/ri";
 import { MdOutlineLeaderboard, MdLogout } from "react-icons/md";
 import { GoTriangleUp } from "react-icons/go";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export const Navigation = ({ user, logout }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenProfile, setIsOpenProfile] = useState(false);
+  const [bgColorVisibility, setBgColorVisibility] = useState("");
   const { name, email, avatar } = user;
 
   const onMenuHandler = () => {
@@ -19,16 +20,37 @@ export const Navigation = ({ user, logout }) => {
     setIsOpenProfile(!isOpenProfile);
   };
 
+  const listenScrollEvent = () => {
+    if (window.scrollY > 64) {
+      return setBgColorVisibility("backdrop-blur-xl bg-white/90 shadow");
+    } else {
+      return setBgColorVisibility("");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", listenScrollEvent);
+    return () => window.removeEventListener("scroll", listenScrollEvent);
+  }, [bgColorVisibility]);
+
   return (
-    <nav className="relative mx-auto max-w-3xl rounded-3xl border bg-white px-5 py-3">
+    <nav
+      className={`relative mx-auto max-w-3xl rounded-3xl ${bgColorVisibility} px-5 py-3`}
+    >
       <div className="flex items-center justify-between ">
         <div className="flex items-center gap-8">
           <img src="/logo.png" alt="" width={30} />
           <div className="hidden gap-2 lg:flex">
-            <NavLink className="flex items-center gap-1 p-2" to="/">
+            <NavLink
+              className="flex items-center gap-1 p-2 hover:text-purple-700"
+              to="/"
+            >
               <RiChatThreadLine /> Threads
             </NavLink>
-            <NavLink className="flex items-center gap-1 p-2" to="/leaderboards">
+            <NavLink
+              className="flex items-center gap-1 p-2 hover:text-purple-700"
+              to="/leaderboards"
+            >
               <MdOutlineLeaderboard /> Leaderboards
             </NavLink>
           </div>
@@ -43,12 +65,12 @@ export const Navigation = ({ user, logout }) => {
 
       {/* navigation drawer for small device */}
       <div
-        className={`${isOpenMenu ? "block" : "hidden"} absolute right-9 text-lg`}
+        className={`${isOpenMenu ? "block" : "hidden"} absolute right-5 text-lg`}
       >
         <GoTriangleUp />
       </div>
       <div
-        className={`${isOpenMenu ? "block" : "hidden"} top-18 absolute right-4 mt-3 grid border bg-white p-4`}
+        className={`${isOpenMenu ? "block" : "hidden"} top-18 absolute right-4 mt-3 grid bg-white px-4 py-8 shadow-sm`}
       >
         <div className="text-center">
           <img
@@ -61,15 +83,21 @@ export const Navigation = ({ user, logout }) => {
           <p className="border-b pb-3 font-light">{email}</p>
         </div>
         <div className="mt-2 border-b pb-2">
-          <NavLink className="flex items-center gap-1 p-2" to="/">
+          <NavLink
+            className="flex items-center gap-1 p-2 hover:text-purple-700"
+            to="/"
+          >
             <RiChatThreadLine /> Threads
           </NavLink>
-          <NavLink className="flex items-center gap-1 p-2" to="/leaderboards">
+          <NavLink
+            className="flex items-center gap-1 p-2 hover:text-purple-700"
+            to="/leaderboards"
+          >
             <MdOutlineLeaderboard /> Leaderboards
           </NavLink>
         </div>
         <button
-          className="mt-3 flex items-center justify-center gap-1 bg-rose-600 py-1 text-white hover:text-rose-700"
+          className="mt-3 flex items-center justify-center gap-1 bg-rose-600 py-1 text-white hover:bg-rose-700"
           onClick={() => logout()}
         >
           <MdLogout /> Log out
@@ -78,13 +106,13 @@ export const Navigation = ({ user, logout }) => {
 
       {/* navigatiton profile for large device */}
       <div
-        className={`${isOpenProfile ? "block" : "hidden"} absolute right-7 text-lg`}
+        className={`${isOpenProfile ? "block" : "hidden"} absolute right-6 text-lg`}
       >
         <GoTriangleUp />
       </div>
 
       <div
-        className={`${isOpenProfile ? "block" : "hidden"} top-18 absolute right-1 mt-3 grid border bg-white p-4`}
+        className={`${isOpenProfile ? "block" : "hidden"} top-18 absolute right-1 mt-3 grid bg-white p-8 shadow-sm`}
       >
         <div className="text-center">
           <img
@@ -97,7 +125,7 @@ export const Navigation = ({ user, logout }) => {
           <p className="border-b pb-3 font-light">{email}</p>
         </div>
         <button
-          className="mt-3 flex items-center justify-center gap-1 bg-rose-600 py-1 text-white hover:text-rose-700"
+          className="mt-3 flex items-center justify-center gap-1 bg-rose-600 py-1 text-white hover:bg-rose-700"
           onClick={() => logout()}
         >
           <MdLogout /> Log out

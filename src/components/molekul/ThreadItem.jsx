@@ -59,25 +59,28 @@ export const ThreadItem = ({
         <img className="rounded-full" src={user.avatar} width={50} alt="" />
         <div className="">
           <p className="font-semibold">{user.name}</p>
-          <p>{postedAt(createdAt)}</p>
+          <p className="text-sm">{postedAt(createdAt)}</p>
         </div>
       </div>
       <div className="mb-4">
-        <Link to={`/${id}`} className="font-bold">
+        <Link
+          to={`/${id}`}
+          className="font-bold hover:text-purple-600 hover:underline"
+        >
           {title}
         </Link>
-        <div className="max-w-4xl">{parse(`${body}`)}</div>
+        <div className="mt-2 max-w-4xl">{parse(`${body}`)}</div>
       </div>
       <div className="flex gap-4 text-lg">
         <button
-          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1"
+          className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1 hover:bg-slate-200"
           onClick={() => onUpVoteClick()}
         >
           {isThreadUpVoted ? <BiSolidUpvote /> : <BiUpvote />}{" "}
           {upVotesBy.length}
         </button>
         <button
-          className=" flex items-center gap-2 rounded bg-slate-100 px-3 py-1"
+          className=" flex items-center gap-2 rounded bg-slate-100 px-3 py-1 hover:bg-slate-200"
           onClick={() => onDownVoteClick()}
         >
           {isThreadDownVoted ? <BiSolidDownvote /> : <BiDownvote />}{" "}
