@@ -17,9 +17,9 @@ export const LoginInput = ({ login }) => {
           Email
         </label>
         <input
-          className="w-full border border-slate-300 py-2 focus:outline-slate-400"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           id="email"
-          type="text"
+          type="email"
           value={email}
           onChange={onEmailChange}
           required
@@ -30,9 +30,9 @@ export const LoginInput = ({ login }) => {
           Password
         </label>
         <input
-          className="w-full border border-slate-300 py-2 focus:outline-slate-400"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           id="password"
-          type="text"
+          type="password"
           value={password}
           onChange={onPasswordChange}
           required

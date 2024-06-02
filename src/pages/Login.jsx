@@ -11,33 +11,35 @@ export const Login = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center">
+    <div className="relative mx-auto flex min-h-screen max-w-4xl items-center justify-center">
       <div className="absolute left-20 top-10 h-48 w-48 animate-blob rounded-full bg-purple-300 opacity-70 mix-blend-multiply blur-xl filter sm:h-72 sm:w-72"></div>
       <div className="animation-delay-2000 absolute right-20 top-4 h-48 w-48 animate-blob rounded-full bg-yellow-300 opacity-70 mix-blend-multiply blur-xl filter sm:h-72 sm:w-72"></div>
       <div className="animation-delay-4000 absolute bottom-10 right-60 h-48 w-48 animate-blob rounded-full bg-pink-300 opacity-70 mix-blend-multiply blur-xl filter sm:h-72 sm:w-72"></div>
-      <div className="z-10 w-full bg-white/60 p-4 backdrop-blur-sm sm:w-4/5 sm:p-8 sm:shadow md:w-3/5 xl:w-1/4">
-        <div className="mb- mx-auto w-max">
+      <div className="z-10 w-96 bg-white/60 p-8 backdrop-blur-sm sm:w-3/5 sm:p-8 md:w-1/2">
+        <div className="mx-auto my-3 w-max">
           <img className="mx-auto mb-1" src="/logo.png" width={60} />
-          <h1 className="sm:text-md bg-gradient-to-r from-purple-300 via-yellow-300 to-pink-300 bg-clip-text text-sm text-transparent">
+          <h1 className="sm:text-md bg-gradient-to-r from-purple-300 via-yellow-300 to-pink-300 bg-clip-text text-sm font-bold text-transparent">
             Disfo<span>Hub</span>
           </h1>
         </div>
-        <div className="my-6">
+        <div className="border-b border-dashed py-4">
           <h2 className="text-lg font-bold">Login Form</h2>
           <p className="text-sm">
             Please enter your email and password to log in.
           </p>
         </div>
-        <LoginInput login={onLogin} />
-        <p className="sm:text-md mt-4 text-center text-sm">
-          Don&apos;t have an account yet? register{" "}
-          <Link
-            className="text-slate-600 underline hover:font-bold hover:text-slate-700"
-            to="/register"
-          >
-            here
-          </Link>
-        </p>
+        <div className="py-4">
+          <LoginInput login={onLogin} />
+          <p className="sm:text-md mt-4 text-center text-sm">
+            Don&apos;t have an account yet?{" "}
+            <Link
+              className="text-slate-600 underline hover:font-bold hover:text-slate-700"
+              to="/register"
+            >
+              Register here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

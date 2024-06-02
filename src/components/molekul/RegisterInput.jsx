@@ -28,7 +28,7 @@ export const RegisterInput = ({ register }) => {
           Name
         </label>
         <input
-          className="w-full border border-slate-300 py-2 focus:outline-slate-400"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           id="name"
           type="text"
           value={name}
@@ -41,9 +41,9 @@ export const RegisterInput = ({ register }) => {
           Email
         </label>
         <input
-          className="w-full border border-slate-300 py-2 focus:outline-slate-400"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           id="email"
-          type="text"
+          type="email"
           value={email}
           onChange={onEmailChange}
           required
@@ -54,9 +54,9 @@ export const RegisterInput = ({ register }) => {
           Password
         </label>
         <input
-          className="w-full border border-slate-300 py-2 focus:outline-slate-400"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           id="password"
-          type="text"
+          type="password"
           value={password}
           onChange={onPasswordChange}
           required
@@ -67,9 +67,9 @@ export const RegisterInput = ({ register }) => {
           Confirm Password
         </label>
         <input
-          className="w-full border border-slate-300 py-2 focus:outline-slate-400"
+          className="w-full border border-slate-300 p-2 focus:outline-slate-400"
           id="password"
-          type="text"
+          type="password"
           value={confirmPassword}
           onChange={onConfirmPasswordChanage}
           required
