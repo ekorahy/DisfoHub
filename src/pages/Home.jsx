@@ -94,7 +94,16 @@ export const Home = () => {
       </div>
       <div className="bg-white/30 backdrop-blur-sm">
         {threadsList.length === 0 ? (
-          <p className="text-center text-rose-600">Empty data</p>
+          <div>
+            <img
+              className="mx-auto w-80 p-8 md:w-96"
+              src="/no_data.png"
+              alt=""
+            />
+            <p className="md:text-md -mt-6 text-center text-sm text-slate-600">
+              Data Not Found
+            </p>
+          </div>
         ) : (
           <ThreadList
             threads={threadsList}
