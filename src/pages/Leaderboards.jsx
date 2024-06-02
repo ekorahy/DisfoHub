@@ -13,7 +13,7 @@ export const Leaderboards = () => {
   }, [dispatch]);
 
   return (
-    <div className="p-4">
+    <div className="p-4 mt-20">
       <LeaderBoardList leaderboards={leaderboards} />
     </div>
   );

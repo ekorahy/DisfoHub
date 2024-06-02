@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export const LeaderboardItem = ({ name, email, avatar, score }) => {
   return (
-    <tr>
+    <tr className="hover:bg-slate-100">
       <td>
         <div className="flex gap-2">
           <img src={avatar} width={50} alt="" />

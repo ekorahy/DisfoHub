@@ -24,5 +24,5 @@ export const LeaderBoardList = ({ leaderboards }) => {
 };
 
 LeaderBoardList.propTypes = {
-  leaderboards: PropTypes.arrayOf(PropTypes.object).isRequired,
+  leaderboards: PropTypes.array.isRequired,
 };
