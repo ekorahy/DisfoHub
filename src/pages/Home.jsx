@@ -18,6 +18,7 @@ export const Home = () => {
     threads = [],
     users = [],
     authUser,
+    loadingBar,
   } = useSelector((states) => states);
 
   const dispatch = useDispatch();
@@ -119,7 +120,7 @@ export const Home = () => {
       </div>
       <div className="bg-white/30 backdrop-blur-sm">
         {threadsList.length === 0 ? (
-          <div>
+          <div className={loadingBar.default === 1 ? 'hidden' : 'block'}>
             <img
               className="mx-auto w-80 p-8 md:w-96"
               src="/no_data.png"
