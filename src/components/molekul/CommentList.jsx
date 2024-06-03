@@ -25,7 +25,7 @@ export const CommentList = ({
 };
 
 CommentList.propTypes = {
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   comments: PropTypes.array.isRequired,
   upVoteComment: PropTypes.func.isRequired,
   downVoteComment: PropTypes.func.isRequired,

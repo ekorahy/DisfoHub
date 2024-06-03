@@ -92,7 +92,7 @@ ThreadDetailContent.propTypes = {
   owner: PropTypes.objectOf(PropTypes.string).isRequired,
   upVotesBy: PropTypes.array.isRequired,
   downVotesBy: PropTypes.array.isRequired,
-  authUser: PropTypes.string.isRequired,
+  authUser: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
   onUpVote: PropTypes.func.isRequired,
   onDownVote: PropTypes.func.isRequired,
   onNeutralVote: PropTypes.func.isRequired,

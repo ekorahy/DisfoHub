@@ -103,11 +103,11 @@ ThreadItem.propTypes = {
   createdAt: PropTypes.string.isRequired,
   totalComments: PropTypes.number.isRequired,
   body: PropTypes.string.isRequired,
-  user: PropTypes.arrayOf(PropTypes.object).isRequired,
+  user: PropTypes.object.isRequired,
   upVotesBy: PropTypes.array.isRequired,
   downVotesBy: PropTypes.array.isRequired,
   onUpVote: PropTypes.func.isRequired,
   onDownVote: PropTypes.func.isRequired,
   onNeutralVote: PropTypes.func.isRequired,
-  authUser: PropTypes.string.isRequired,
+  authUser: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };

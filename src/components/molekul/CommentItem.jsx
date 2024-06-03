@@ -85,5 +85,5 @@ CommentItem.propTypes = {
   upVoteComment: PropTypes.func.isRequired,
   downVoteComment: PropTypes.func.isRequired,
   neutralVoteComment: PropTypes.func.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };

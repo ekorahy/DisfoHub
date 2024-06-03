@@ -1,4 +1,5 @@
 import { ThreadItem } from "./ThreadItem";
+import PropTypes from "prop-types";
 
 export const ThreadList = ({
   threads,
@@ -21,4 +22,12 @@ export const ThreadList = ({
       ))}
     </>
   );
+};
+
+ThreadList.propTypes = {
+  threads: PropTypes.array.isRequired,
+  onUpVote: PropTypes.func.isRequired,
+  onDownVote: PropTypes.func.isRequired,
+  onNeutralVote: PropTypes.func.isRequired,
+  authUser: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]).isRequired,
 };
