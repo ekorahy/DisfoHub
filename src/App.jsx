@@ -14,9 +14,11 @@ import { Loading } from "./components/atom/Loading";
 import Swal from "sweetalert2";
 
 export const App = () => {
-  const { authUser = null, isPreload = false } = useSelector(
-    (states) => states,
-  );
+  const {
+    authUser = null,
+    isPreload = false,
+    loadingBar,
+  } = useSelector((states) => states);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -51,14 +53,13 @@ export const App = () => {
     return null;
   }
 
-  // Kondisi untuk menentukan apakah header harus dirender atau tidak
-  const showHeader =
+  const hideHeaderAndFooter =
     location.pathname !== "/login" && location.pathname !== "/register";
 
   return (
     <>
       <Loading />
-      {showHeader && (
+      {hideHeaderAndFooter && (
         <header className="fixed top-0 z-10 w-full p-4">
           <Navigation user={authUser} logout={onLogOut} />
         </header>
@@ -73,6 +74,18 @@ export const App = () => {
           <Route path="/leaderboards" element={<Leaderboards />} />
         </Routes>
       </main>
+      {hideHeaderAndFooter && (
+        <footer
+          className={`${loadingBar.default === 1 ? "hidden" : "block"} p-4`}
+        >
+          <p className="text-center">
+            &copy; 2024 -{" "}
+            <span className="bg-gradient-to-r from-purple-300 via-yellow-300 to-pink-300 bg-clip-text text-sm font-bold text-transparent">
+              DisfoHub
+            </span>
+          </p>
+        </footer>
+      )}
     </>
   );
 };
