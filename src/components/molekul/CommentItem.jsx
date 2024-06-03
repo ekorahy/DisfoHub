@@ -1,11 +1,11 @@
 import { postedAt } from "../../utils";
 import parse from "html-react-parser";
 import {
-  BiDownvote,
-  BiSolidDownvote,
-  BiSolidUpvote,
-  BiUpvote,
-} from "react-icons/bi";
+  AiFillDislike,
+  AiFillLike,
+  AiOutlineDislike,
+  AiOutlineLike,
+} from "react-icons/ai";
 import PropTypes from "prop-types";
 
 export const CommentItem = ({
@@ -60,14 +60,14 @@ export const CommentItem = ({
           className="flex items-center gap-2 rounded bg-slate-50 px-3 py-1 hover:bg-slate-100"
           onClick={() => upVoteCommentHandler()}
         >
-          {isCommentUpVoted ? <BiSolidUpvote /> : <BiUpvote />}{" "}
+          {isCommentUpVoted ? <AiFillLike /> : <AiOutlineLike />}{" "}
           {upVotesBy.length}
         </button>
         <button
           className="flex items-center gap-2 rounded bg-slate-50 px-3 py-1 hover:bg-slate-100"
           onClick={() => downVoteCommentHandler()}
         >
-          {isCommentDownVoted ? <BiSolidDownvote /> : <BiDownvote />}{" "}
+          {isCommentDownVoted ? <AiFillDislike /> : <AiOutlineDislike />}{" "}
           {downVotesBy.length}
         </button>
       </div>

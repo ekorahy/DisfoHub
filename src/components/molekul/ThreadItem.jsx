@@ -1,11 +1,11 @@
 import { postedAt } from "../../utils";
 import parse from "html-react-parser";
 import {
-  BiDownvote,
-  BiSolidDownvote,
-  BiSolidUpvote,
-  BiUpvote,
-} from "react-icons/bi";
+  AiFillDislike,
+  AiFillLike,
+  AiOutlineDislike,
+  AiOutlineLike,
+} from "react-icons/ai";
 import { LiaCommentsSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -76,14 +76,14 @@ export const ThreadItem = ({
           className="flex items-center gap-2 rounded bg-slate-100 px-3 py-1 hover:bg-slate-200"
           onClick={() => onUpVoteClick()}
         >
-          {isThreadUpVoted ? <BiSolidUpvote /> : <BiUpvote />}{" "}
+          {isThreadUpVoted ? <AiFillLike /> : <AiOutlineLike />}{" "}
           {upVotesBy.length}
         </button>
         <button
           className=" flex items-center gap-2 rounded bg-slate-100 px-3 py-1 hover:bg-slate-200"
           onClick={() => onDownVoteClick()}
         >
-          {isThreadDownVoted ? <BiSolidDownvote /> : <BiDownvote />}{" "}
+          {isThreadDownVoted ? <AiFillDislike /> : <AiOutlineDislike />}{" "}
           {downVotesBy.length}
         </button>
         <div className="px-3 py-1">
