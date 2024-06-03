@@ -25,7 +25,7 @@ function unsetAuthUserActionCreator() {
   };
 }
 
-function asyncSetAuthUser({ email, password }) {
+function asyncSetAuthUser({ email, password }, navigate) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
@@ -39,6 +39,7 @@ function asyncSetAuthUser({ email, password }) {
         showConfirmButton: false,
         timer: 1500,
       });
+      navigate("/");
     } catch (error) {
       Swal.fire({
         icon: "error",

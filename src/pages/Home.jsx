@@ -11,6 +11,7 @@ import { IoMdAdd } from "react-icons/io";
 import { Link, useSearchParams } from "react-router-dom";
 import { SearchBar } from "../components/atom/SearchBar";
 import { CategoryList } from "../components/molekul/CategoryList";
+import Swal from "sweetalert2";
 
 export const Home = () => {
   const {
@@ -30,15 +31,39 @@ export const Home = () => {
   }, [dispatch]);
 
   const onUpVote = (threadId) => {
-    dispatch(asyncToggleUpvoteThread(threadId));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleUpvoteThread(threadId));
+    }
   };
 
   const onDownVote = (threadId) => {
-    dispatch(asyncToggleDownvoteThread(threadId));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleDownvoteThread(threadId));
+    }
   };
 
   const onNeutralVote = (threadId) => {
-    dispatch(asyncToggleNeutralvoteThread(threadId));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleNeutralvoteThread(threadId));
+    }
   };
 
   const onKeywordChangeHandler = (keyword) => {
@@ -65,7 +90,7 @@ export const Home = () => {
   const threadsList = filteredThreads.map((thread) => ({
     ...thread,
     user: users.find((user) => user.id === thread.ownerId),
-    authUser: authUser.id,
+    authUser: authUser !== null && authUser.id,
   }));
 
   const threadCategoryList = threads.filter(
@@ -110,18 +135,20 @@ export const Home = () => {
             onUpVote={onUpVote}
             onDownVote={onDownVote}
             onNeutralVote={onNeutralVote}
-            authUser={authUser.id}
+            authUser={authUser !== null && authUser.id}
           />
         )}
       </div>
-      <div className="absolute right-16">
-        <Link
-          to="/add"
-          className="fixed bottom-6 rounded-full bg-slate-600 p-3 text-xl text-white hover:bg-slate-700"
-        >
-          <IoMdAdd />
-        </Link>
-      </div>
+      {authUser !== null && (
+        <div className="absolute right-16">
+          <Link
+            to="/add"
+            className="fixed bottom-6 rounded-full bg-slate-600 p-3 text-xl text-white hover:bg-slate-700"
+          >
+            <IoMdAdd />
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

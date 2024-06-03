@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   asyncAddComment,
   asyncReceiveThreadDetail,
@@ -14,6 +14,7 @@ import {
 import { ThreadDetailContent } from "../components/molekul/ThreadDetailContent";
 import { CommentInput } from "../components/molekul/CommentInput";
 import { CommentList } from "../components/molekul/CommentList";
+import Swal from "sweetalert2";
 
 export const ThreadDetail = () => {
   const { id } = useParams();
@@ -29,27 +30,75 @@ export const ThreadDetail = () => {
   };
 
   const onUpVote = (threadId) => {
-    dispatch(asyncToggleUpVoteThreadDetail(threadId));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleUpVoteThreadDetail(threadId));
+    }
   };
 
   const onDownVote = (threadId) => {
-    dispatch(asyncToggleDownVoteThreadDetail(threadId));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleDownVoteThreadDetail(threadId));
+    }
   };
 
   const onNeutralVote = (threadId) => {
-    dispatch(asyncToggleNeutralVoteThreadDetail(threadId));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleNeutralVoteThreadDetail(threadId));
+    }
   };
 
   const onUpVoteComment = (commentId) => {
-    dispatch(asyncToggleUpVoteComment({ threadId: id, commentId }));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleUpVoteComment({ threadId: id, commentId }));
+    }
   };
 
   const onDownVoteComment = (commentId) => {
-    dispatch(asyncToggleDownVoteComment({ threadId: id, commentId }));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleDownVoteComment({ threadId: id, commentId }));
+    }
   };
 
   const onNeutralVoteComment = (commentId) => {
-    dispatch(asyncToggleNeutralVoteComment({ threadId: id, commentId }));
+    if (authUser === null) {
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        html: 'Please <a class="text-purple-600 underline hover:text-purple-700" href="/login">login</a> first to vote.',
+      });
+    } else {
+      dispatch(asyncToggleNeutralVoteComment({ threadId: id, commentId }));
+    }
   };
 
   if (!threadDetail) {
@@ -60,14 +109,27 @@ export const ThreadDetail = () => {
     <div className="mt-20 p-4">
       <ThreadDetailContent
         {...threadDetail}
-        authUser={authUser.id}
+        authUser={authUser !== null && authUser.id}
         onUpVote={onUpVote}
         onDownVote={onDownVote}
         onNeutralVote={onNeutralVote}
       />
       <div className="mb-4">
-        <p className="mb-2">Leave a comment</p>
-        <CommentInput comment={onCommentThread} />
+        <p className="mb-2 font-bold">Leave a comment</p>
+        {authUser === null ? (
+          <p>
+            Please{" "}
+            <Link
+              className="text-purple-600 underline hover:text-purple-700"
+              to="/login"
+            >
+              Log in
+            </Link>{" "}
+            first to leave a comment.
+          </p>
+        ) : (
+          <CommentInput comment={onCommentThread} />
+        )}
       </div>
       <div>
         <p className="mb-4 font-bold">
@@ -87,7 +149,7 @@ export const ThreadDetail = () => {
             </div>
           ) : (
             <CommentList
-              userId={authUser.id}
+              userId={authUser !== null && authUser.id}
               comments={threadDetail.comments}
               upVoteComment={onUpVoteComment}
               downVoteComment={onDownVoteComment}

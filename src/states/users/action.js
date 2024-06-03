@@ -26,7 +26,7 @@ function asyncRegisterUser({ name, email, password }, navigate) {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate('/')
+      navigate("/login");
     } catch (error) {
       Swal.fire({
         icon: "error",

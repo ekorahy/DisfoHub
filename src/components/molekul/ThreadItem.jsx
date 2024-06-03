@@ -64,7 +64,7 @@ export const ThreadItem = ({
       </div>
       <div className="mb-4">
         <Link
-          to={`/${id}`}
+          to={`/thread/${id}`}
           className="font-bold hover:text-purple-600 hover:underline"
         >
           {title}

@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
 import { LoginInput } from "../components/molekul/LoginInput";
 import { asyncSetAuthUser } from "../states/authUser/action";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onLogin = ({ email, password }) => {
-    dispatch(asyncSetAuthUser({ email, password }));
+    dispatch(asyncSetAuthUser({ email, password }, navigate));
   };
 
   return (

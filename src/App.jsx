@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncUnsetAuthUser } from "./states/authUser/action";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
@@ -17,9 +17,9 @@ export const App = () => {
   const { authUser = null, isPreload = false } = useSelector(
     (states) => states,
   );
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(asyncPreloadProcess());
@@ -51,30 +51,24 @@ export const App = () => {
     return null;
   }
 
-  if (authUser === null) {
-    return (
-      <>
-        <Loading />
-        <main>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-        </main>
-      </>
-    );
-  }
+  // Kondisi untuk menentukan apakah header harus dirender atau tidak
+  const showHeader =
+    location.pathname !== "/login" && location.pathname !== "/register";
 
   return (
     <>
       <Loading />
-      <header className="fixed top-0 z-10 w-full p-4">
-        <Navigation user={authUser} logout={onLogOut} />
-      </header>
+      {showHeader && (
+        <header className="fixed top-0 z-10 w-full p-4">
+          <Navigation user={authUser} logout={onLogOut} />
+        </header>
+      )}
       <main className="mx-auto max-w-3xl">
         <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
-          <Route path="/:id" element={<ThreadDetail />} />
+          <Route path="/thread/:id" element={<ThreadDetail />} />
           <Route path="/add" element={<AddThread />} />
           <Route path="/leaderboards" element={<Leaderboards />} />
         </Routes>
