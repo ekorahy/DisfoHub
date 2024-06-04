@@ -1,4 +1,3 @@
-import { postedAt } from "../../utils";
 import parse from "html-react-parser";
 import {
   AiFillDislike,
@@ -7,6 +6,7 @@ import {
   AiOutlineLike,
 } from "react-icons/ai";
 import PropTypes from "prop-types";
+import { Profile } from "../atom/Profile";
 
 export const CommentItem = ({
   id,
@@ -47,13 +47,7 @@ export const CommentItem = ({
 
   return (
     <div className="mb-6">
-      <div className="flex items-center gap-2">
-        <img className="rounded-full" src={owner.avatar} width={40} alt="" />
-        <div className="text-sm">
-          <p className="font-semibold">{owner.name}</p>
-          <p className="text-sm">{postedAt(createdAt)}</p>
-        </div>
-      </div>
+      <Profile avatar={owner.avatar} name={owner.name} createdAt={createdAt} avatarSize={40} textSize='text-sm' />
       <div className="ml-12 mt-2 bg-slate-50 p-2">{parse(`${content}`)}</div>
       <div className="ml-12 mt-2 flex gap-2">
         <button
