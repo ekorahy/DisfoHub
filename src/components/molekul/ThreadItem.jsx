@@ -1,4 +1,3 @@
-import { postedAt } from "../../utils";
 import parse from "html-react-parser";
 import {
   AiFillDislike,
@@ -9,6 +8,7 @@ import {
 import { LiaCommentsSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Profile } from "../atom/Profile";
 
 export const ThreadItem = ({
   id,
@@ -55,13 +55,7 @@ export const ThreadItem = ({
       <div className="mb-4">
         <p className="inline bg-slate-100 px-3 py-1 text-sm">#{category}</p>
       </div>
-      <div className="mb-4 flex items-center gap-2">
-        <img className="rounded-full" src={user.avatar} width={50} alt="" />
-        <div className="">
-          <p className="font-semibold">{user.name}</p>
-          <p className="text-sm">{postedAt(createdAt)}</p>
-        </div>
-      </div>
+      <Profile avatar={user.avatar} name={user.name} createdAt={createdAt} avatarSize={50} textSize='text-md' />
       <div className="mb-4">
         <Link
           to={`/thread/${id}`}
