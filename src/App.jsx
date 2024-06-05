@@ -12,6 +12,7 @@ import { Navigation } from "./components/molekul/Navigation";
 import { Leaderboards } from "./pages/Leaderboards";
 import { Loading } from "./components/atom/Loading";
 import Swal from "sweetalert2";
+import { BrandPreload } from "./components/atom/BrandPreload";
 
 export const App = () => {
   const {
@@ -50,7 +51,7 @@ export const App = () => {
   };
 
   if (isPreload) {
-    return null;
+    return <BrandPreload />;
   }
 
   const hideHeaderAndFooter =
