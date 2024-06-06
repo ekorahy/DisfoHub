@@ -1,8 +1,20 @@
 import PropTypes from "prop-types";
 
-export const LeaderboardItem = ({ name, email, avatar, score }) => {
+export const LeaderboardItem = ({ name, email, avatar, score, index }) => {
+  let number;
+  if (index === 0) {
+    number = "🥇";
+  } else if (index === 1) {
+    number = "🥈";
+  } else if (index === 2) {
+    number = "🥉";
+  } else {
+    number = index + 1;
+  }
+
   return (
-    <tr className="hover:bg-slate-100">
+    <tr className="text-center hover:bg-slate-100">
+      <td>{number}</td>
       <td>
         <div className="flex gap-2">
           <img src={avatar} width={50} alt="" />
@@ -22,4 +34,5 @@ LeaderboardItem.propTypes = {
   email: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
