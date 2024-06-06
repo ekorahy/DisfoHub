@@ -18,7 +18,7 @@ export const LeaderboardItem = ({ name, email, avatar, score, index }) => {
       <td>
         <div className="flex gap-2">
           <img src={avatar} width={50} alt="" />
-          <div>
+          <div className="text-start">
             <h3 className="font-semibold">{name}</h3>
             <p className="font-light">{email}</p>
           </div>
