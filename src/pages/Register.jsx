@@ -35,7 +35,7 @@ export const Register = () => {
             Already have an account?{" "}
             <Link
               className="text-slate-600 underline hover:font-bold hover:text-slate-700"
-              to="/"
+              to="/login"
             >
               Log in
             </Link>
