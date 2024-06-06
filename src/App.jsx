@@ -65,7 +65,7 @@ export const App = () => {
           <Navigation user={authUser} logout={onLogOut} />
         </header>
       )}
-      <main className="mx-auto max-w-3xl">
+      <main className="mx-auto max-w-5xl">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

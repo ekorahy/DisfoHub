@@ -34,7 +34,7 @@ export const Navigation = ({ user, logout }) => {
 
   return (
     <nav
-      className={`relative mx-auto max-w-3xl rounded-3xl ${bgColorVisibility} px-5 py-3`}
+      className={`relative mx-auto max-w-5xl rounded-3xl ${bgColorVisibility} px-5 py-3`}
     >
       <div className="flex items-center justify-between ">
         <div className="flex items-center gap-8">
