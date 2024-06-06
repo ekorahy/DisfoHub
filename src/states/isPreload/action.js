@@ -30,4 +30,9 @@ function asyncPreloadProcess() {
   };
 }
 
-export { ActionType, setAuthUserActionCreator, asyncPreloadProcess };
+export {
+  ActionType,
+  setIsPreloadActionCreator,
+  setAuthUserActionCreator,
+  asyncPreloadProcess,
+};

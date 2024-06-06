@@ -163,6 +163,9 @@ function asyncToggleNeutralvoteThread(threadId) {
 export {
   ActionType,
   receiveThreadsActionCreator,
+  toggleUpvoteThread,
+  toggleDownvoteThread,
+  toggleNeutralvoteThread,
   asyncGetThreads,
   addThreadActionCreator,
   asyncAddThread,

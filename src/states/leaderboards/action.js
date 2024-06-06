@@ -32,4 +32,4 @@ function asyncGetLeaderboards() {
   };
 }
 
-export { ActionType, asyncGetLeaderboards };
+export { ActionType, receiveLeaderboardsActionCreator, asyncGetLeaderboards };
