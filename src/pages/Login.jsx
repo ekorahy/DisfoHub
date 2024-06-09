@@ -31,13 +31,22 @@ export const Login = () => {
         </div>
         <div className="py-4">
           <LoginInput login={onLogin} />
-          <p className="sm:text-md mt-4 text-center text-sm">
+          <p className="sm:text-md mt-6 border-b border-dashed pb-2 text-center text-sm">
             Don&apos;t have an account yet?{" "}
             <Link
               className="text-slate-600 underline hover:font-bold hover:text-slate-700"
               to="/register"
             >
               Register here
+            </Link>
+          </p>
+          <p className="sm:text-md mt-2 text-center text-sm">
+            Return to{" "}
+            <Link
+              className="text-slate-600 underline hover:font-bold hover:text-slate-700"
+              to="/"
+            >
+              Home
             </Link>
           </p>
         </div>

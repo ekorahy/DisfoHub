@@ -31,13 +31,22 @@ export const Register = () => {
         </div>
         <div className="py-4">
           <RegisterInput register={onRegister} />
-          <p className="sm:text-md mt-4 text-center text-sm">
+          <p className="sm:text-md mt-6 border-b border-dashed pb-2 text-center text-sm">
             Already have an account?{" "}
             <Link
               className="text-slate-600 underline hover:font-bold hover:text-slate-700"
               to="/login"
             >
               Log in
+            </Link>
+          </p>
+          <p className="sm:text-md mt-2 text-center text-sm">
+            Return to{" "}
+            <Link
+              className="text-slate-600 underline hover:font-bold hover:text-slate-700"
+              to="/"
+            >
+              Home
             </Link>
           </p>
         </div>
