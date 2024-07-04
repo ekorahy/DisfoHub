@@ -13,6 +13,7 @@ import { Leaderboards } from "./pages/Leaderboards";
 import { Loading } from "./components/atom/Loading";
 import Swal from "sweetalert2";
 import { BrandPreload } from "./components/atom/BrandPreload";
+import NotFound from "./pages/NotFound";
 
 export const App = () => {
   const {
@@ -73,6 +74,7 @@ export const App = () => {
           <Route path="/thread/:id" element={<ThreadDetail />} />
           <Route path="/add" element={<AddThread />} />
           <Route path="/leaderboards" element={<Leaderboards />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
       </main>
       {hideHeaderAndFooter && (
